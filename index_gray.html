@@ -25,22 +25,44 @@
             text-align: center;
             display: flex;
             gap: 20px;
+            flex-wrap: wrap; /* Added */
+            max-width: 90%; /* Added */
+            margin: auto; /* Added */
         }
 
         .countdown-item {
             display: flex;
             flex-direction: column;
             align-items: center;
+            flex-grow: 1; /* Added */
+            flex-basis: calc(25% - 20px); /* Added */
+            max-width: calc(25% - 20px); /* Added */
         }
 
         .number {
-            font-size: 10rem;
-            letter-spacing: 0.5rem;
+            font-size: 10vw; /* Changed to vw */
+            letter-spacing: 0.5vw; /* Changed to vw */
         }
 
         .label {
-            font-size: 1.2rem;
+            font-size: 4vw; /* Changed to vw */
             color: #dbf5f8;
+        }
+
+        @media (max-width: 768px) { /* Adjustments for smaller screens */
+            .number {
+                font-size: 12vw;
+                letter-spacing: 1vw;
+            }
+
+            .label {
+                font-size: 6vw;
+            }
+
+            .countdown-item {
+                flex-basis: calc(50% - 20px);
+                max-width: calc(50% - 20px);
+            }
         }
     </style>
 </head>
