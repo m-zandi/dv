@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Countdown Timer</title>
+    <style>
+        @font-face {
+            font-family: 'Digital';
+            src: url('Digital.ttf') format('truetype');
+        }
+
+        body {
+            background-color: #3a3a3a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Digital', sans-serif;
+            color: #dbf5f8;
+        }
+
+        .countdown-container {
+            text-align: center;
+            display: flex;
+            gap: 20px;
+        }
+
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .number {
+            font-size: 10rem;
+            letter-spacing: 0.5rem;
+        }
+
+        .label {
+            font-size: 1.2rem;
+            color: #dbf5f8;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown-item">
+            <span id="days" class="number"></span>
+            <span class="label">Days</span>
+        </div>
+        <div class="countdown-item">
+            <span id="hours" class="number"></span>
+            <span class="label">Hours</span>
+        </div>
+        <div class="countdown-item">
+            <span id="minutes" class="number"></span>
+            <span class="label">Minutes</span>
+        </div>
+        <div class="countdown-item">
+            <span id="seconds" class="number"></span>
+            <span class="label">Seconds</span>
+        </div>
+    </div>
+
+    <script>
+        function startCountdown() {
+            const daysElement = document.getElementById('days');
+            const hoursElement = document.getElementById('hours');
+            const minutesElement = document.getElementById('minutes');
+            const secondsElement = document.getElementById('seconds');
+
+            const endDate = new Date('August 9, 2024 00:00:00').getTime();
+
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const distance = endDate - now;
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                daysElement.textContent = days.toString().padStart(2, '0');
+                hoursElement.textContent = hours.toString().padStart(2, '0');
+                minutesElement.textContent = minutes.toString().padStart(2, '0');
+                secondsElement.textContent = seconds.toString().padStart(2, '0');
+
+                if (distance < 0) {
+                    clearInterval(countdownInterval);
+                }
+            }
+
+            updateCountdown();
+            const countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        startCountdown();
+    </script>
+</body>
+</html>
